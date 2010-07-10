@@ -1,0 +1,532 @@
+/* $Id: style.css,v 1.1.4.2 2009/03/19 23:50:07 couzinhub Exp $
+*/
+
+/** General styles 
+---------------------------------*/
+
+body {
+  margin: 0;
+  font-size: 100%; /* Fixes exaggerated text resizing in IE6 and IE7 */
+ 	background: #34374a url(../images/background_noise.png);
+}
+
+#page {
+	/* Use a 12px base font size with a 18px line height */
+  font-size: 0.875em; /* 16px x .75 = 12px */
+  line-height: 1.286em; /* 14px x 1.286 = 18px */
+ 	padding: 0 10px;
+	background: #fff;
+}
+
+body, caption, th, td, input, textarea, select, option, legend, fieldset {
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+}
+
+/* When declaring Link states, remember: LoVe HA : Link | Hover | Visited | Active */
+
+a:link, a:visited {
+  color: blue;
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  color: red;
+  text-decoration: underline;
+}
+
+/* Titles  */
+
+h1 {
+	font-size: 2em;
+	line-height: 1.3em;
+	padding: 0 0 0.5em;
+	margin: 0;
+}
+
+h2 {
+	font-size: 1.5em;
+	line-height: 1.3em;
+	margin-top: 0.667em; /* Equivalent to 1em in the page's base font: 1 / 1.5 = 0.667em */
+	margin-bottom: 0.667em;
+}
+				
+h3 {
+	font-size: 1.3em;
+	line-height: 1.3em;
+	margin-top: 0.769em; /* Equivalent to 1em in the page's base font: 1 / 1.3 = 0.769 */
+	margin-bottom: 0.769em;
+}
+				
+h4, h5, h6 {
+	font-size: 1.1em;
+	line-height: 1.3em;
+	margin-top: 0.909em; /* Equivalent to 1em in the page's base font: 1 / 1.1 = 0.909 */
+	margin-bottom: 0.909em;
+}
+ 
+/* Paragraph Styles */
+
+p {
+  margin: 1em 0;
+}
+
+/* List Styles  */
+
+ul, ol {
+  margin-left: 0;
+  padding-left: 2em;
+}
+
+/* Table Styles  */
+
+table {
+	width: 99%;
+}
+tr.even td, tr.odd td {
+	padding: 10px 5px;
+}
+tr.odd {
+	background-color: #fff;
+}
+
+/* Code */
+
+pre, code {
+  font-family: "Bitstream Vera Sans Mono","Courier New",monospace;
+}
+
+pre {
+	background-color: #efefef;
+	display: block;
+	padding: 5px;
+	margin: 5px 0;
+	border: 1px solid #aaa;
+}
+
+/* List Styles */
+
+ul          { list-style-type: disc; }
+ul ul       { list-style-type: circle; }
+ul ul ul    { list-style-type: square; }
+ul ul ul ul { list-style-type: circle; }
+ol          { list-style-type: decimal; }
+ol ol       { list-style-type: lower-alpha; }
+ol ol ol    { list-style-type: decimal; }
+
+/* Abbreviation */
+
+abbr {
+  border-bottom: 1px dotted #666;
+  cursor: help;
+  white-space: nowrap;
+}
+
+
+/** Colours
+---------------------------------
+*  delete when starting a new theme
+*/
+
+#header {
+	position: relative;
+/*	background: #dae3f5;*/
+	background: url(../images/header_gradient.png) top left repeat-x #ecf1fa;
+	height: 50px;
+	border-bottom: #2d2d8a solid 5px;
+}
+.front #header { height: 203px; margin: 0; }
+
+.not-front #get-social { margin-bottom: 25px; }
+
+
+/* Icons are from here: http://www.komodomedia.com/download/
+   A couple of them I made myself: Drupal and Qik. */
+#get-social {
+	-moz-border-radius-bottomleft:10px;
+	-moz-border-radius-bottomright:10px;
+	-webkit-border-bottom-right-radius: 10px;
+	-webkit-border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+/*	background: #464D61; */
+	background: url(../images/social_gradient.png) top left repeat-x #434A5D;
+	height:35px;
+	position: relative;
+}
+	#get-social ul { list-style: none; position: absolute; right: 15px; top: 9px; }
+	#get-social li { float: left; }
+	#get-social a {
+		outline: none; /* Remove FF link outlines */
+		display: block;
+		width: 16px;
+		height: 16px;
+		margin-left: 10px;
+		text-indent: -9000px;
+		background: url(../images/social_sprite.png);
+	}
+	#get-social a#twitter { background-position: 0 top; }
+		#get-social a:hover#twitter { background-position: 0 bottom; }
+	#get-social a#flickr { background-position: -16px top; }
+		#get-social a:hover#flickr { background-position: -16px bottom; }
+	#get-social a#drupal { background-position: -32px top; }
+		#get-social a:hover#drupal { background-position: -32px bottom; }
+	#get-social a#facebook { background-position: -48px top; }
+		#get-social a:hover#facebook { background-position: -48px bottom; }
+	#get-social a#delicious { background-position: -64px top; }
+		#get-social a:hover#delicious { background-position: -64px bottom; }
+	#get-social a#lastfm { background-position: -80px top; }
+		#get-social a:hover#lastfm { background-position: -80px bottom; }
+	#get-social a#qik { background-position: -96px top; }
+		#get-social a:hover#qik { background-position: -96px bottom; }
+	#get-social a#vimeo { background-position: -112px top; }
+		#get-social a:hover#vimeo { background-position: -112px bottom; }
+
+#logo, #logo a:link, #logo a:visited, #logo a:active, #logo .logo-hover {
+	outline: none;
+	position: absolute;
+	margin: 0;
+	top: 0;
+	right: 0;
+	width: 230px;
+	height: 203px;
+	text-indent: -9000px;
+	background: url(../images/tylor_sprite.gif) no-repeat left top;
+}
+
+#logo a:hover, #logo a:focus, #logo .logo-hover {
+	background: url(../images/tylor_sprite.gif) no-repeat right top;
+}
+
+ #site-name /* The name of the website */
+ {
+ 	font-family: Myriad Pro, Arial;
+ 	font-weight: normal;
+ }
+ h1#site-name
+ {
+ 	font-size: 3.75em !important;
+ 	*font-size: 3em !important;
+ 	_font-size: 3.75em !important;
+ 	padding: 20px 0 0 40px;
+ }
+ body.not-front div#name-and-slogan
+ {
+ 	font-size: 0.5em;
+ 	text-align: right;
+ 	padding: 10px 50px 0 0;
+ }
+  body.not-front div#name-and-slogan h1 { padding: 0; }
+ 
+ #site-name strong {
+ 	font-weight: lighter;
+ }
+
+ #site-name a:link,
+ #site-name a:visited
+ {
+   color: #25256a;
+   text-decoration: none;
+   text-shadow: 1px 1px 0 #FFFFFF;
+ }
+  
+
+#footer {
+	background: #DAE3F5;
+	clear: both;
+	margin-top: 30px;
+	font-family: Trebuchet MS, Arial;
+	font-size: 1.1em;
+	color: #424141;
+	text-align: center;
+	padding-top: 35px;
+	-moz-border-radius-topright: 25px;
+	-moz-border-radius-topleft: 25px;
+	-webkit-border-top-right-radius: 25px;
+	-webkit-border-top-left-radius: 25px;
+	border-top-right-radius: 25px;
+	border-top-left-radius: 25px;
+}
+
+#footer a { color: #424141; }
+
+#footer-message /* Wrapper for the footer message from Drupal's "Site information"
+                   and for any blocks placed in the footer region */
+{
+  background: #DAE3F5;
+}
+
+#sidebar-left {
+	background: #B9CAFF;
+}
+
+#sidebar-right {
+	background: #FF8539;
+}
+
+#navigation {
+	background-color: #f0ff83;
+}
+
+#main
+{
+	position: inherit;
+	font-family: Trebuchet MS, Arial;
+	font-size: 1.2em;
+	line-height: 1.5em;
+	color: #424141;
+}
+
+#main a, #main a:link, #main a:visited {
+    color: #2d2d8a;
+    text-decoration: none;
+    font-weight: bold; }
+#main a:hover, a:focus { text-decoration: underline; }
+
+  .node /* Node wrapper */
+  {
+  	position: relative;
+  }
+
+.node-inner /* Additional wrapper for node */
+{
+	width: 650px;
+	margin-top: 23px;
+	border-bottom: 1px #2d2d8a solid;
+	padding-bottom: 10px;
+}
+
+.node .submitted /* The "posted by" information */
+{
+	width: 165px;
+	position: absolute;
+	left: 685px;
+	top: 5px;
+	font-size: 0.9em;
+	*font-size: 0.8em;
+	_font-size: 0.9em;
+	font-weight: bold;
+}
+
+.node .taxonomy /* Node taxonomy (categories) */
+{
+	width: 165px;
+	position: absolute;
+	left: 685px;
+	top: 33px;
+	font-size: 0.9em;
+}
+
+.node .statistics_counter { display: block; }
+
+.node .content /* Node's content wrapper */
+{
+	min-height: 158px;
+	_height: auto !important; /* IE min-height hack */
+	_height: 158px; /* IE min-height hack */
+}
+
+.node div.links /* Wrapper for node links */
+{
+  padding: 15px 0;
+  position: absolute;
+  left: 685px;
+  bottom: 0px;
+  _bottom: auto;
+  _margin-top: -119px;
+  font-size: 0.9em;
+  border-bottom: 1px solid #2d2d8a;
+  width: 165px;
+}
+
+#mission /* The mission statement of the site (displayed on homepage) */
+{
+	position: absolute;
+	top: 50px;
+	margin: 35px 0 0 100px;
+	width: 415px;
+	font-family: Myriad Pro, Arial;
+	font-size: 1.1em;
+	line-height: 1.3em;
+	*font-size: 0.8em;
+	_font-size: 0.9em;
+	*line-height: 1.2em;
+	color: #000;
+	text-shadow: 1px 1px 0 #FFFFFF;
+}  
+
+#mission a, #mission a:link, #mission a:visited { color: #000; text-decoration: none; font-weight: bold; }
+
+#mission a:hover, a:focus { text-decoration: underline; }
+
+#content-header /* Wrapper for breadcrumb, title, messages, tabs, and help */
+{
+	padding: 0 40px;
+}
+#content-area /* Wrapper for the actual page content */
+{
+	margin: 0 40px;
+}
+
+.taxonomy ul.links li
+{
+  display: inline;
+  list-style-type: none;
+  margin: 0 1.0em 0 0;
+  padding: 0;
+}
+.taxonomy ul.links li a 
+{ 
+	color: #2d2d8a !important;
+	font-weight: bold !important;
+	background: transparent url('../images/link-bg.png') top left repeat-x;
+	*background-position: bottom left;
+
+}
+
+  #comments /* Wrapper for all comments */
+  {
+    margin: 1em 0;
+    width: 850px;
+  }
+
+  .comment /* Wrapper for a single comment */
+  {
+  	border-bottom: 1px solid #2D2D8A;
+  	margin-top: 15px;
+  }
+
+  .comment-inner /* Additional wrapper for a single comment */
+  {
+  }
+
+  .comment.odd /* An odd-numbered comment in the list of comments */
+  {
+  }
+
+  .comment.even /* An even-numbered comment in the list of comments */
+  {
+  }
+
+  .comment-unpublished /* Unpublished comments */
+  {
+    /* background-color: #fff4f4; */ /* Drupal core uses a #fff4f4 background */
+  }
+
+  .comment-unpublished div.unpublished /* The word "Unpublished" displayed beneath the content. See also the div.unpublished declaration in the node section above. */
+  {
+  }
+
+  .comment-by-author /* A comment created by the node's author */
+  {
+  }
+
+  .comment-by-anon /* A comment created by an anonymous user */
+  {
+  }
+
+  .comment-mine /* A comment created by the current user */
+  {
+  }
+
+  .comment h3.title /* Comment title */
+  {
+  }
+
+  .new /* "New" marker for comments that are new for the current user */
+  {
+    color: #c00;
+  }
+
+  .comment .picture /* The picture of the comment author */
+  {
+  }
+
+  .comment .submitted /* The "posted by" information */
+  {
+  }
+
+  .comment .content /* Comment's content wrapper */
+  {
+  }
+
+  .comment div.links /* Wrapper for comment links. See also the ul.links declaration in the node section above. */
+  {
+    margin: 1em 0;
+  }
+  .comment div.links ul { padding: 0; }
+  .comment div.links li { display: inline; padding-right: 20px; }
+
+  .indented /* Nested comments are indented */
+  {
+    /* margin-left: 25px; */ /* Drupal core uses a 25px left margin */
+  }
+
+  .preview .comment /* Preview of the comment before submitting new or updated comment */
+  {
+    /* background-color: #ffffea; */ /* Drupal core uses a #ffffea background */
+  }
+  
+  #comments .box { margin: 1em 0; }
+  	#comment-form #comment-left label { float: left; width: 120px; }
+  	#comment-form #comment-left .form-text { width: 325px; }
+  	#comment-form #comment-left { float: left; }
+  	
+  	#comment-form #comment-right label {  }
+  	#comment-form #comment-right #edit-comment { height: 123px; width: 380px;  _width: 360px; }
+  	#comment-form #comment-right { margin-top: -24px; margin-left: 14px; width: 380px; _width: 360px; float: left; }
+  	
+  	#comment-form #comment-clear { clear: both; }
+  	
+  	#comment-form .tips { margin-left: 17px; }
+  	
+  #block-block-1 /* Categories */
+  { text-align: left; padding: 0 50px 20px 50px; margin: 0; }
+  	#block-block-1 h3, 
+  	#block-block-1 .content,
+  	#block-block-1 .item-list,
+  	#block-block-1 ul, 
+  	#block-block-1 ul li { display: inline; margin: 0; padding: 0; }
+  	#block-block-1 h3 { font-size: 1.5em; }
+  	#block-block-1 a { text-decoration: underline; }
+  	
+  	  #block-menu-menu-people /* People */
+  { text-align: left; padding: 20px 50px; margin: 0; }
+  	#block-menu-menu-people h3, 
+  	#block-menu-menu-people .content,
+  	#block-menu-menu-people ul, 
+  	#block-menu-menu-people ul li { display: inline; margin: 0; padding: 0; }
+  	#block-menu-menu-people h3 { font-size: 1.5em; }
+  	#block-menu-menu-people a { text-decoration: underline; }
+  	
+   #block-menu-menu-social /* Sources */
+  { text-align: left; padding: 0 50px 20px 50px; margin: 0; }
+  	#block-menu-menu-social h3, 
+  	#block-menu-menu-social .content,
+  	#block-menu-menu-social ul, 
+  	#block-menu-menu-social ul li { display: inline; margin: 0; padding: 0; }
+  	#block-menu-menu-social h3 { font-size: 1.5em; }
+  	#block-menu-menu-social a { text-decoration: underline; }
+
+.pager /* A list of page numbers when more than 1 page of content is available */
+{
+  clear: both;
+  margin: 30px 0 0 !important;
+  text-align: center;
+}
+
+.pager li
+{
+  padding: 0.5em;
+}
+
+.item-list ul.pager li { margin: 0; }
+
+.feed-icon /* The links to the RSS or Atom feeds for the current list of content */
+{
+	display: none;
+  margin: 1em 0;
+}
+
+blockquote { font-size: 0.95em; margin: 1em 2em; line-height: 1.5em }
+
+.node .content .center { text-align: center; }
