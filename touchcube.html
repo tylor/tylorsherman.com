@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Touch cube</title>
+  <meta name = "viewport" content = "user-scalable=no, width=device-width">
+  <style>
+  body { margin: 0; padding: 0; }
+  </style>
+</head>
+<body>
+
+<canvas id="cube" width="320" height="356"></canvas>
+<script type="text/javascript">
+/** TODO:
+ *    - Detect viewport and reset canvas size based on a rotation… later: http://developer.apple.com/safari/library/documentation/AppleApplications/Reference/SafariWebContent/HandlingEvents/HandlingEvents.html#//apple_ref/doc/uid/TP40006511-SW16
+ *    - Do nicer rotations ie. quaternion-like.
+ */
+
+// Initialize a cube.
+var cube = cube(80);
+
+// Keep track of the current degree of rotation, set start position.
+var currentRotation_x = Math.PI / 8;
+var currentRotation_y = Math.PI / 4;
+
+// Keep track of coordinates at the start of a touch.
+// Might not need this, see if the touch object holds this information.
+var touchStart_x;
+var touchStart_y;
+
+var timer = setTimeout(update, 40);
+
+/**
+ * Initialize our touch callbacks on window load, draw cube for first time.
+ */
+window.onload = function() {
+  var canvas = document.getElementById("cube");
+  var ctx = canvas.getContext("2d");
+  
+  // Bind the touch events to our canvas element.
+  canvas.addEventListener("touchmove", myTouchMove, false);
+  canvas.addEventListener("touchstart", myTouchStart, false);
+  canvas.addEventListener("touchend", myTouchEnd, false);
+  
+  // Initial display of cube.
+  update();
+}
+
+/**
+ * Ends up being my draw function, and is so far triggered by touch events.
+ */
+function update() {
+  var canvas = document.getElementById("cube");
+  var ctx = canvas.getContext("2d");
+  
+  // Clear canvas for redraw.
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  
+  var rotated_cube = new Array();
+  var i = 0;
+  var j = 0;
+  
+  // Need to do the rotation ahead of time so we can sort by z-axis to find depth.
+  for(i = 0; i < cube.length; i++) {
+    rotated_cube[i] = new Array(); // Since sized dynamically.
+    for(j = 0; j < 4; j++) {
+      point = rotate(cube[i][j]);
+      rotated_cube[i][j] = [point[0], point[1], point[2]];
+    }
+    rotated_cube[i][4] = cube[i][4]; // preserve color...
+  }
+  
+  // Sort by depth.
+  rotated_cube.sort(depthSort);
+  
+  // Draw our cube.
+  for(i = 0; i < cube.length; i++) {
+    ctx.save();
+      ctx.translate(canvas.width/2, canvas.height/2); // Center of screen.
+      ctx.fillStyle = rotated_cube[i][4]; // Color stored in 4th index.
+      ctx.beginPath()
+        ctx.moveTo(rotated_cube[i][0][0], rotated_cube[i][0][1]);
+        ctx.lineTo(rotated_cube[i][1][0], rotated_cube[i][1][1]);
+        ctx.lineTo(rotated_cube[i][2][0], rotated_cube[i][2][1]);
+        ctx.lineTo(rotated_cube[i][3][0], rotated_cube[i][3][1]);
+      ctx.closePath();
+      ctx.fill();
+    ctx.restore();
+  }  
+
+  // Rotate ambiently unless touched.
+  if(timer) {
+    // currentRotation_x += 0.005;
+    currentRotation_y += 0.005;
+    timer = setTimeout(update, 40);
+  }
+}
+
+/**
+ * At this point, since it is just a cube, this should be good enough.
+ * Basically using painters algorithm so sort by nearest/farthest polygon.
+ */
+function depthSort(a, b) {
+  a_min = Math.min(a[0][2], a[1][2], a[2][2], a[3][2]);
+  b_min = Math.min(b[0][2], b[1][2], b[2][2], b[3][2]);
+  return a_min - b_min;
+}
+
+/**
+ * Apply the rotation functions to a point.
+ */
+function rotate(point) {
+  return rotate_x(rotate_y(point));
+}
+
+/**
+ * Explicitly do a y-axis matrix rotation.
+ *
+ * @param point
+ *  A vector in array form: [x, y, z].
+ *
+ * @return
+ *  The rotated vector
+ */
+function rotate_y(point) {
+  return [
+    point[0]*Math.cos(currentRotation_y)+1*point[2]*Math.sin(currentRotation_y),
+    point[1],
+    -1*point[0]*Math.sin(currentRotation_y)+1*point[2]*Math.cos(currentRotation_y)
+   ];
+}
+
+/**
+ * Explicitly do an x-axis matrix rotation.
+ *
+ * @param point
+ *  A vector in array form: [x, y, z].
+ *
+ * @return
+ *  The rotated vector
+ */
+function rotate_x(point) {
+  return [
+    point[0],
+    point[1]*Math.cos(currentRotation_x)-1*point[2]*Math.sin(currentRotation_x),
+    point[1]*Math.sin(currentRotation_x)+1*point[2]*Math.cos(currentRotation_x)
+   ];
+}
+
+/**
+ * Register the start of a touch.
+ */
+function myTouchStart(event) {
+  // Turn off rotation.
+  if(timer != null) {
+    timer = null;
+  }
+  touchStart_x = event.touches[0].pageX;
+  touchStart_y = event.touches[0].pageY;
+}
+
+/**
+ * Register the end of a touch.
+ */
+function myTouchEnd(event) {
+  var dirX = touchStart_x - event.changedTouches[0].pageX;
+  var dirY = touchStart_y - event.changedTouches[0].pageY;
+  if(dirX < 0) {
+      currentRotation_y += 0.15;
+  }
+  if(dirX > 0) {
+      currentRotation_y -= 0.15;
+  }
+  /* if(dirY < 0) {
+      currentRotation_x -= 0.15;
+  }
+  if(dirY > 0) {
+      currentRotation_x += 0.15;
+  } // */
+
+  update();
+}
+
+/**
+ * While a touch is in progress.
+ */
+function myTouchMove(event) {
+  // Prevent scrolling of browser pane.
+  event.preventDefault();
+  
+  var dirX = touchStart_x - event.targetTouches[0].pageX;
+  var dirY = touchStart_y - event.targetTouches[0].pageY;
+  
+  if(dirX < 0) {
+      currentRotation_y += 0.15;
+  }
+  if(dirX > 0) {
+      currentRotation_y -= 0.15;
+  }
+  /* if(dirY < 0) {
+      currentRotation_x -= 0.15;
+  }
+  if(dirY > 0) {
+      currentRotation_x += 0.15;
+  } // */
+
+  update();
+
+  //var touch = event.targetTouches[0];
+}
+
+/**
+ * Generate a cube of a given size.
+ *
+ * @param size
+ * 	Edge length/2.
+ * 	
+ */
+function cube(size) {
+  // Initialize the cube faces.
+  var face0 = [
+    [-1*size, -1*size, 1*size],
+    [-1*size, 1*size, 1*size],
+    [1*size, 1*size, 1*size],
+    [1*size, -1*size, 1*size],
+    "#ff0000"  // the face color
+    // "rgba(255, 0, 0, 0.75)" // Alpha works too.
+  ];
+
+  var face1 = [
+    [-1*size, -1*size, -1*size],
+    [-1*size, 1*size, -1*size],
+    [1*size, 1*size, -1*size],
+    [1*size, -1*size, -1*size],
+    "#00ff00"
+  ];
+
+  var face2 = [
+    [-1*size, -1*size, 1*size],
+    [-1*size, -1*size, -1*size],
+    [-1*size, 1*size, -1*size],
+    [-1*size, 1*size, 1*size],
+    "#0000ff"
+  ];
+
+  var face3 = [
+    [1*size, -1*size, 1*size],
+    [1*size, -1*size, -1*size],
+    [1*size, 1*size, -1*size],
+    [1*size, 1*size, 1*size],
+    "#ffff00"
+  ];
+
+  var face4 = [
+    [-1*size, 1*size, 1*size],
+    [-1*size, 1*size, -1*size],
+    [1*size, 1*size, -1*size],
+    [1*size, 1*size, 1*size],
+    "#ff00ff"
+  ];
+
+  var face5 = [
+    [-1*size, -1*size, 1*size],
+    [-1*size, -1*size, -1*size],
+    [1*size, -1*size, -1*size],
+    [1*size, -1*size, 1*size],
+    "#00ffff"
+  ];
+
+  return [face0, face1, face2, face3, face4, face5];
+}
+</script>
+
+</body>
+
+</html>
