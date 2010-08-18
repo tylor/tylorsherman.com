@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <title>Caloric Density Grapher</title>
+  
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+  
+  <style>
+  #graph { position: relative; height: 150px; }
+  #tracker { background: #aaa; position: absolute; width: 1px; height: 100%; top: 10px; left: 0px;; }
+  .bar { width: 20px; height: 150px; margin: 10px; float: left; position: relative; }
+    .bar-info { background: #000; width: 20px; position: absolute; bottom: 0; }
+      .bar.active .bar-info { background: #666; }
+      .bar.hover .bar-info { background: #777; }
+    .bar-info p { position: relative; top: -30px; font-size: small; background: white; left: -1px; cursor: default; }
+  #info { clear: both; }
+  .item { overflow: hidden; width: 100%; }
+  .image { background: #aaa; width: 100px; height: 100px; float: left; margin: 10px; }
+  </style>
+  
+  <script>
+  $(document).ready(function(){
+    $('#graph').mousemove(function (e) { $('#tracker').css('left', e.pageX - 9); });
+    $('.bar:not("".processed"")').addClass('processed').mousedown(function() {
+      $('.item').hide();
+      $('.bar').removeClass('active');
+      $('#' + this.id).addClass('active');
+      $('#' + this.id.replace('bar-', 'info-')).show();
+    }).hover(function() { $(this).addClass('hover'); }, function() { $(this).removeClass('hover'); });
+    $('.item:not("".processed"")').hide().addClass('processed');
+  });
+  </script>
+  
+</head>
+
+<body>
+<div id="graph">
+  <div id="tracker"></div>
+  <div id="bar-1" class="bar">
+    <div class="bar-info" style="height: 1%"></div>
+  </div>
+  <div id="bar-10" class="bar">
+    <div class="bar-info" style="height: 10%"></div>
+  </div>
+  <div id="bar-20" class="bar">
+    <div class="bar-info" style="height: 20%"></div>
+  </div>
+  <div id="bar-30" class="bar">
+    <div class="bar-info" style="height: 30%"></div>
+  </div>
+  <div id="bar-40" class="bar">
+    <div class="bar-info" style="height: 40%"><p>40%</p></div>
+  </div>
+  <div id="bar-50" class="bar">
+    <div class="bar-info" style="height: 50%"><p>50%</p></div>
+  </div>
+  <div id="bar-60" class="bar">
+    <div class="bar-info" style="height: 60%"></div>
+  </div>
+  <div id="bar-70" class="bar">
+    <div class="bar-info" style="height: 70%"></div>
+  </div>
+  <div id="bar-80" class="bar">
+    <div class="bar-info" style="height: 80%"></div>
+  </div>
+  <div id="bar-90" class="bar">
+    <div class="bar-info" style="height: 90%"></div>
+  </div>
+  <div id="bar-100" class="bar">
+    <div class="bar-info" style="height: 100%"></div>
+  </div>
+
+</div>
+<div id="info">
+  <div id="info-1" class="item">
+    <div class="image"></div>
+    <h2>Hamburger</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-10" class="item">
+    <div class="image"></div>
+    <h2>Cheeseburger</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-20" class="item">
+    <div class="image"></div>
+    <h2>Lentils</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-30" class="item">
+    <div class="image"></div>
+    <h2>Cabbage</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-40" class="item">
+    <div class="image"></div>
+    <h2>Water</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-50" class="item">
+    <div class="image"></div>
+    <h2>Chicken</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-60" class="item">
+    <div class="image"></div>
+    <h2>Beef</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>  
+  <div id="info-70" class="item">
+    <div class="image"></div>
+    <h2>All Bran</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-80" class="item">
+    <div class="image"></div>
+    <h2>Corn Flakes</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-90" class="item">
+    <div class="image"></div>
+    <h2>Chicken</h2>
+    <div class="description">
+      This is some info about what you are eating.
+    </div>
+  </div>
+  <div id="info-100" class="item">
+    <div class="image"></div>
+    <h2>Fluffy Ruffs</h2>
+    <div class="description">
+      This is some info about what you are eating. <a href="http://www.youtube.com/watch?v=vjnuBTPOaKY">YouTube</a>
+    </div>
+  </div>
+  
+  
+</div>
+
+</body>
+</html>
